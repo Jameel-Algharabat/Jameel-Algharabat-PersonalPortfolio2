@@ -447,26 +447,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Profile Modal functionality
-    const profilePic = document.querySelector('.nav-profile-pic');
+    const profileIcon = document.querySelector('.nav-profile-icon');
     const profileModal = document.getElementById('profileModal');
     const closeProfileModal = document.querySelector('.close-profile-modal');
 
-    profilePic.addEventListener('click', () => {
-        profileModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-
-    closeProfileModal.addEventListener('click', () => {
-        profileModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-
-    profileModal.addEventListener('click', (e) => {
-        if (e.target === profileModal) {
+    if (profileIcon && profileModal && closeProfileModal) {
+        profileIcon.addEventListener('click', () => {
+            profileModal.classList.add('active');
+        });
+        closeProfileModal.addEventListener('click', () => {
             profileModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
+        });
+        // Close modal when clicking outside the modal content
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.classList.remove('active');
+            }
+        });
+    }
 
     // Visitor Counter functionality
     function updateVisitorCount() {
