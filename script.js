@@ -78,10 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
+    const navOverlay = document.querySelector('.nav-overlay');
 
     burger.addEventListener('click', () => {
         // Toggle Navigation
         nav.classList.toggle('nav-active');
+        navOverlay.classList.toggle('active');
 
         // Animate Links
         navLinks.forEach((link, index) => {
@@ -94,6 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Burger Animation
         burger.classList.toggle('toggle');
+    });
+
+    // Close nav when clicking overlay
+    navOverlay.addEventListener('click', () => {
+        nav.classList.remove('nav-active');
+        navOverlay.classList.remove('active');
+        burger.classList.remove('toggle');
+        navLinks.forEach(link => link.style.animation = '');
     });
 
     // Smooth Scrolling
