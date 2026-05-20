@@ -2659,6 +2659,7 @@ html {
     display: flex;
     align-items: center;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 /* Profile Modal Styles */
