@@ -457,21 +457,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Profile Modal functionality
-    const profileIcon = document.querySelector('.nav-profile-icon');
     const profileModal = document.getElementById('profileModal');
     const closeProfileModal = document.querySelector('.close-profile-modal');
+    const profileNavLink = document.getElementById('profile-nav-link');
+    const profilePicContainer = document.querySelector('.profile-pic-container');
 
-    if (profileIcon && profileModal && closeProfileModal) {
-        profileIcon.addEventListener('click', () => {
-            profileModal.classList.add('active');
-        });
-        closeProfileModal.addEventListener('click', () => {
-            profileModal.classList.remove('active');
-        });
-        // Close modal when clicking outside the modal content
+    function openProfileModal(e) {
+        if (e) e.preventDefault();
+        profileModal.classList.add('active');
+    }
+
+    function closeProfileModalFn() {
+        profileModal.classList.remove('active');
+    }
+
+    if (profileModal && closeProfileModal) {
+        if (profileNavLink) {
+            profileNavLink.addEventListener('click', openProfileModal);
+        }
+        if (profilePicContainer) {
+            profilePicContainer.addEventListener('click', openProfileModal);
+        }
+        closeProfileModal.addEventListener('click', closeProfileModalFn);
         profileModal.addEventListener('click', (e) => {
             if (e.target === profileModal) {
-                profileModal.classList.remove('active');
+                closeProfileModalFn();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && profileModal.classList.contains('active')) {
+                closeProfileModalFn();
             }
         });
     }
